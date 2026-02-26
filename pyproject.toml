@@ -1,0 +1,50 @@
+[project]
+name = "aem2"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy==2.1.3",
+    "openai==1.61.1",
+    "python-dotenv==1.0.1",
+    "tiktoken==0.8.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "ruff>=0.15.2",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+fix = true
+show-fixes = true
+
+[tool.ruff.lint]
+select = [
+  "E", "F", "I",   # estilo/errores/imports (ya tienes esto)
+  "B",             # bugbear: bugs comunes
+  "UP",            # moderniza sintaxis para py311
+  "SIM",           # simplificaciones útiles
+  "C4",            # comprehensions mejorables
+  "ARG",           # argumentos no usados
+  "RUF",           # reglas propias de Ruff
+]
+ignore = [
+  "E501",          # dejas line-length al formateador
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["ARG001", "S101"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"

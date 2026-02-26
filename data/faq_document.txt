@@ -1,0 +1,64 @@
+# HR SaaS - Documento interno de FAQs (inventado)
+
+Este documento reúne preguntas frecuentes y procedimientos internos sobre el uso de la plataforma “PeopleOps Cloud”, un sistema de RR.HH. (HR SaaS) para gestionar empleados, licencias, onboarding, asistencia, nómina y aprobaciones. La información aquí aplica a clientes que usan la plataforma en modo estándar. Si tu compañía tiene personalizaciones o integraciones especiales, revisa también la guía de implementación y la sección de integraciones.
+
+## 1) Accesos, roles y permisos
+La plataforma usa un modelo de permisos basado en roles. Los roles principales son: Administrador, RR.HH., Líder/Manager y Empleado. El Administrador puede configurar la compañía, crear políticas, definir aprobaciones y gestionar seguridad. RR.HH. puede administrar empleados, documentos, licencias y reportes. Líder/Manager puede aprobar solicitudes del equipo y consultar información del equipo (según configuración). El Empleado puede ver su perfil, solicitar licencias, cargar documentación y consultar recibos (si está habilitado).
+
+Para solicitar acceso de Administrador, debes pedirlo a RR.HH. o a un Administrador existente. Si no hay ningún Administrador activo, el soporte puede ayudar a restaurar el acceso, pero necesitará validar identidad y propiedad de la cuenta de la empresa. En general, se recomienda tener al menos dos usuarios con rol Administrador para reducir riesgo operativo.
+
+## 2) Alta de usuarios y onboarding
+Los usuarios pueden ser creados manualmente o por importación masiva. La importación masiva admite un archivo CSV con campos mínimos como nombre, apellido, email, país, documento, fecha de ingreso y área. Luego del alta, la plataforma envía una invitación por email para que el usuario cree su contraseña y configure su método de autenticación.
+
+Durante el onboarding, se pueden asignar tareas: firma de documentos, carga de datos bancarios, lectura de políticas internas y configuración de horarios. Si un usuario no recibe la invitación, revisar primero bandeja de spam, y confirmar que el dominio de email no bloquea correos automáticos. Si es necesario, se puede reenviar la invitación desde el panel de RR.HH. o Administrador.
+
+## 3) Seguridad, MFA y recuperación de cuenta
+La plataforma soporta autenticación con contraseña y MFA (Multi-Factor Authentication) mediante aplicación autenticadora (TOTP). Por seguridad, cuando MFA está activo, el usuario debe ingresar un código temporal al iniciar sesión. Si un usuario pierde acceso a su aplicación MFA, existen dos opciones: (1) usar códigos de recuperación (si los guardó al activar MFA), o (2) solicitar un reset de MFA a un Administrador.
+
+El soporte puede asistir en casos críticos, pero el reset de MFA requiere verificación adicional. En empresas con requisitos estrictos, puede pedirse confirmación por un Administrador y validación del dominio corporativo. Por buenas prácticas, se recomienda que todos los usuarios Administradores tengan MFA activo y que RR.HH. documente el proceso de recuperación.
+
+## 4) Perfil del empleado y datos sensibles
+El perfil del empleado contiene información personal (domicilio, documento, fecha de nacimiento), información laboral (posición, fecha de ingreso, salario si aplica) y datos para pagos (CBU/IBAN). El acceso a datos sensibles se controla por rol. Por ejemplo, un Líder puede ver información del equipo, pero no necesariamente verá datos bancarios o salario, según política de la empresa.
+
+Si un empleado solicita corrección de datos, RR.HH. puede editar el perfil o habilitar que el empleado edite ciertos campos. Algunas empresas prefieren que el empleado actualice y RR.HH. apruebe. Siempre se recomienda registrar auditoría y mantener trazabilidad de cambios.
+
+## 5) Licencias, vacaciones y aprobaciones
+Las licencias se gestionan por políticas: vacaciones, enfermedad, estudio, maternidad/paternidad, días administrativos y otras. Cada política define reglas: acumulación, saldo anual, documentación requerida y flujo de aprobación. Por ejemplo, vacaciones puede requerir aprobación del Líder y notificación a RR.HH. En licencias por enfermedad, puede requerirse certificado médico cargado en el sistema.
+
+Para solicitar una licencia, el empleado elige tipo, fechas y un comentario. Si la política requiere documentación, el sistema solicitará adjuntar archivo. El Líder recibe una notificación y puede aprobar o rechazar. Si se rechaza, se recomienda explicar el motivo y proponer alternativas. Para evitar conflictos, algunas empresas definen ventanas mínimas de aviso previo (por ejemplo, solicitar vacaciones con 10 días de anticipación).
+
+## 6) Asistencia, horarios y correcciones
+El módulo de asistencia permite registrar entrada y salida. Algunas compañías usan marcación manual (web o móvil) y otras integran sistemas externos. Los horarios pueden ser fijos, flexibles o por turnos. Si un empleado olvida marcar, puede pedir una corrección: se registra una solicitud con fecha, horario propuesto y motivo. El Líder o RR.HH. aprueba la corrección según la política.
+
+Para auditoría, las correcciones quedan registradas con quién solicitó, quién aprobó y cuándo. Si detectas múltiples correcciones frecuentes, se recomienda revisar entrenamiento del usuario, problemas de conectividad o reglas internas de turnos.
+
+## 7) Documentos, firmas y comprobantes
+La plataforma soporta carga y firma de documentos. RR.HH. puede publicar documentos obligatorios (por ejemplo, reglamento interno) y solicitar firma electrónica. El empleado recibe una tarea en el portal y, al completar, queda un registro con fecha y versión del documento firmado.
+
+En el módulo de recibos, RR.HH. puede subir recibos PDF de nómina. La visibilidad de recibos depende de configuración. Si un empleado no ve sus recibos, revisar: (1) que el recibo esté cargado en el período correcto, (2) que el empleado esté activo, y (3) que el permiso de “Ver recibos” esté habilitado para el rol Empleado.
+
+## 8) Facturación, planes y usuarios activos
+La facturación se calcula según el plan contratado. En el plan estándar, se cobra por usuario activo del mes. Un “usuario activo” es un empleado habilitado en el sistema, independientemente de si inició sesión. Si deseas reducir facturación, puedes desactivar empleados que ya no pertenecen a la empresa, en lugar de eliminarlos. La desactivación preserva historial, auditoría y documentos, pero el usuario deja de contar para facturación en el siguiente ciclo.
+
+Los cambios de plan (upgrade/downgrade) pueden requerir aprobación del área financiera del cliente. En algunos casos, al cambiar plan, ciertas funcionalidades quedan disponibles o se limitan (por ejemplo, integraciones, reportes avanzados, flujos personalizados). Se recomienda revisar el resumen de plan antes de confirmar cambios.
+
+## 9) Integraciones: SSO, Slack y nómina
+Algunas empresas habilitan SSO (Single Sign-On) con proveedores como Google Workspace o Azure AD. Cuando SSO está habilitado, el login puede depender del proveedor. Si un usuario no puede entrar, verificar: (1) que el email coincida exactamente, (2) que el usuario exista y esté activo, (3) que el proveedor no esté bloqueando el acceso por política. En caso de incidentes, se puede deshabilitar SSO temporalmente solo por un Administrador para restaurar acceso.
+
+La integración con Slack puede enviar notificaciones de aprobaciones y recordatorios. Si Slack no notifica, revisar que el token esté vigente y que el canal configurado exista. En integraciones con nómina, la exportación suele generar archivos con novedades: altas, bajas, cambios de salario, licencias y ausencias. Se recomienda validar el formato y hacer pruebas en ambientes de staging cuando sea posible.
+
+## 10) Auditoría, logs y soporte
+La auditoría registra acciones relevantes: cambios de permisos, edición de datos sensibles, aprobaciones y carga de documentos. Los Administradores pueden consultar reportes de actividad. Para soporte, siempre es útil adjuntar: email del usuario afectado, empresa, fecha/hora aproximada, capturas de pantalla y el mensaje de error. Si el problema es de acceso, indicar si MFA/SSO está activo.
+
+En caso de incidentes, el soporte puede pedir un “ID de evento” o referencia de actividad para rastrear. Si el incidente involucra datos sensibles, se deben seguir políticas de privacidad y minimizar la exposición. Nunca enviar contraseñas por correo. El soporte nunca solicitará la contraseña del usuario.
+
+## 11) Buenas prácticas recomendadas
+1) Mantener al menos dos Administradores activos.
+2) Activar MFA en roles críticos.
+3) Definir políticas claras de licencias y aprobaciones.
+4) Usar desactivación en vez de eliminación para preservar auditoría.
+5) Revisar integraciones periódicamente (tokens, permisos, canales).
+6) Documentar procedimientos de recuperación de cuenta y reset de MFA.
+7) Capacitar a Líderes en aprobaciones y correcciones de asistencia.
+
+Fin del documento.
