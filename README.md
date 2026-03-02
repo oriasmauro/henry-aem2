@@ -26,6 +26,28 @@ Etapas:
    - `sentence-transformers` (modelo local)
 4. Persistencia en `storage/index_<provider>.json` con texto + metadata + vector.
 
+```mermaid
+sequenceDiagram
+    participant CLI
+    participant BuildIndex
+    participant Chunker
+    participant EmbeddingProvider
+    participant Storage
+
+    CLI->>BuildIndex: Ejecutar build_index.py (--provider)
+    BuildIndex->>BuildIndex: Cargar documento (utf-8 / fallback)
+    BuildIndex->>Chunker: chunk_text_by_tokens(text, size, overlap)
+    Chunker-->>BuildIndex: Lista de Chunks (>=20)
+
+    BuildIndex->>EmbeddingProvider: embed_texts(chunks)
+    EmbeddingProvider-->>BuildIndex: Lista de vectores
+
+    BuildIndex->>Storage: Guardar index_<provider>.json
+    Storage-->>BuildIndex: Confirmación
+
+    BuildIndex-->>CLI: Index creado correctamente
+````
+
 ### 2) Pipeline de consulta (`src/query.py`)
 
 Etapas:
@@ -36,6 +58,29 @@ Etapas:
 4. Ensamblado de contexto.
 5. Generación de respuesta con LLM usando solo ese contexto.
 6. Salida JSON por `stdout` con las 3 claves requeridas.
+
+```mermaid
+sequenceDiagram
+    participant CLI
+    participant Query
+    participant EmbeddingProvider
+    participant VectorSearch
+    participant LLM
+    participant Output
+
+    CLI->>Query: Ejecutar query.py (--question, --provider)
+    Query->>EmbeddingProvider: embed(question)
+    EmbeddingProvider-->>Query: Query embedding
+
+    Query->>VectorSearch: k-NN (cosine similarity)
+    VectorSearch-->>Query: Top-K chunks (2..5)
+
+    Query->>LLM: Prompt(question + context)
+    LLM-->>Query: Generated answer
+
+    Query->>Output: Construir JSON estructurado
+    Output-->>CLI: Imprimir JSON (stdout)
+  ```
 
 ### 3) Pipeline de evaluación (`src/evaluator.py`) - opcional
 
@@ -51,6 +96,21 @@ Etapas:
 4. Salida JSON con:
    - `score` (0 a 10)
    - `reason` (justificación del puntaje)
+
+```mermaid
+sequenceDiagram
+    participant CLI
+    participant Evaluator
+    participant JudgeLLM
+    participant Output
+
+    CLI->>Evaluator: Ejecutar evaluator.py (JSON input)
+    Evaluator->>JudgeLLM: Enviar question + answer + chunks
+    JudgeLLM-->>Evaluator: score + reason
+
+    Evaluator->>Output: Construir JSON evaluación
+    Output-->>CLI: Imprimir evaluación
+```
 
 ## Estructura del proyecto
 
