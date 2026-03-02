@@ -1,0 +1,65 @@
+[
+  {
+    "user_question": "¿Cómo se solicita vacaciones y qué aprobaciones requiere?",
+    "system_answer": "Para solicitar vacaciones, el empleado debe elegir el tipo de licencia, las fechas y añadir un comentario. Si la política de vacaciones requiere documentación, el sistema solicitará que se adjunte un archivo. El Líder del empleado recibirá una notificación y tendrá la opción de aprobar o rechazar la solicitud. En caso de rechazo, se recomienda que el Líder explique el motivo y proponga alternativas. Además, algunas empresas establecen ventanas mínimas de aviso previo, como solicitar vacaciones con 10 días de anticipación (fuente: chunk_id=10 y chunk_id=11).",
+    "chunks_related": [
+      {
+        "id": 9,
+        "score": 0.5644,
+        "text": "recomienda registrar auditoría y mantener trazabilidad de cambios.\n\n## 5) Licencias, vacaciones y aprobaciones\nLas licencias se gestionan por políticas: vacaciones, enfermedad, estudio, maternidad/paternidad, días administrativos y otras. Cada política define reglas: acumulación, saldo anual, documentación requerida y flujo de aprobación. Por ejemplo, vacaciones puede requerir aprobación del Líder y notificación a RR.HH. En licencias por enfermedad, puede requerirse certificado"
+      },
+      {
+        "id": 10,
+        "score": 0.5594,
+        "text": "y notificación a RR.HH. En licencias por enfermedad, puede requerirse certificado médico cargado en el sistema.\n\nPara solicitar una licencia, el empleado elige tipo, fechas y un comentario. Si la política requiere documentación, el sistema solicitará adjuntar archivo. El Líder recibe una notificación y puede aprobar o rechazar. Si se rechaza, se recomienda explicar el motivo y proponer alternativas. Para evitar conflictos, algunas empresas definen ventanas mínimas de aviso prev"
+      },
+      {
+        "id": 11,
+        "score": 0.5012,
+        "text": "alternativas. Para evitar conflictos, algunas empresas definen ventanas mínimas de aviso previo (por ejemplo, solicitar vacaciones con 10 días de anticipación).\n\n## 6) Asistencia, horarios y correcciones\nEl módulo de asistencia permite registrar entrada y salida. Algunas compañías usan marcación manual (web o móvil) y otras integran sistemas externos. Los horarios pueden ser fijos, flexibles o por turnos. Si un empleado olvida marcar, puede pedir una corrección: se regist"
+      }
+    ]
+  },
+  {
+    "user_question": "¿Cómo se calcula la facturación por usuario activo?",
+    "system_answer": "La facturación se calcula según el plan contratado. En el plan estándar, se cobra por cada usuario activo del mes. Un “usuario activo” es un empleado habilitado en el sistema, independientemente de si inició sesión. Para reducir la facturación, se puede desactivar a empleados que ya no pertenecen a la empresa, lo que preserva su historial, auditoría y documentos, pero hace que el usuario deje de contar para la facturación en el siguiente ciclo (fuente: chunk_id=15 y chunk_id=16).",
+    "chunks_related": [
+      {
+        "id": 15,
+        "score": 0.7365,
+        "text": ", planes y usuarios activos\nLa facturación se calcula según el plan contratado. En el plan estándar, se cobra por usuario activo del mes. Un “usuario activo” es un empleado habilitado en el sistema, independientemente de si inició sesión. Si deseas reducir facturación, puedes desactivar empleados que ya no pertenecen a la empresa, en lugar de eliminarlos. La desactivación preserva historial, auditoría y documentos, pero el usuario deja de contar para facturación en el"
+      },
+      {
+        "id": 14,
+        "score": 0.5269,
+        "text": ", RR.HH. puede subir recibos PDF de nómina. La visibilidad de recibos depende de configuración. Si un empleado no ve sus recibos, revisar: (1) que el recibo esté cargado en el período correcto, (2) que el empleado esté activo, y (3) que el permiso de “Ver recibos” esté habilitado para el rol Empleado.\n\n## 8) Facturación, planes y usuarios activos\nLa facturación se calcula según el plan contratado."
+      },
+      {
+        "id": 16,
+        "score": 0.4617,
+        "text": "historial, auditoría y documentos, pero el usuario deja de contar para facturación en el siguiente ciclo.\n\nLos cambios de plan (upgrade/downgrade) pueden requerir aprobación del área financiera del cliente. En algunos casos, al cambiar plan, ciertas funcionalidades quedan disponibles o se limitan (por ejemplo, integraciones, reportes avanzados, flujos personalizados). Se recomienda revisar el resumen de plan antes de confirmar cambios.\n\n## 9) Integraciones: SSO, Slack y nómina\nAlgunas empresas hab"
+      }
+    ]
+  },
+  {
+    "user_question": "Si un usuario no puede entrar con SSO, ¿qué debería revisar soporte?",
+    "system_answer": "Si un usuario no puede entrar con SSO, soporte debería verificar lo siguiente: (1) que el email coincida exactamente, (2) que el usuario exista y esté activo, y (3) que el proveedor no esté bloqueando el acceso por política. Además, en caso de incidentes, se puede solicitar un “ID de evento” o referencia de actividad para rastrear el problema (fuente: chunk_id=17).",
+    "chunks_related": [
+      {
+        "id": 17,
+        "score": 0.6282,
+        "text": "9) Integraciones: SSO, Slack y nómina\nAlgunas empresas habilitan SSO (Single Sign-On) con proveedores como Google Workspace o Azure AD. Cuando SSO está habilitado, el login puede depender del proveedor. Si un usuario no puede entrar, verificar: (1) que el email coincida exactamente, (2) que el usuario exista y esté activo, (3) que el proveedor no esté bloqueando el acceso por política. En caso de incidentes, se puede deshabilitar S"
+      },
+      {
+        "id": 20,
+        "score": 0.6137,
+        "text": ", fecha/hora aproximada, capturas de pantalla y el mensaje de error. Si el problema es de acceso, indicar si MFA/SSO está activo.\n\nEn caso de incidentes, el soporte puede pedir un “ID de evento” o referencia de actividad para rastrear. Si el incidente involucra datos sensibles, se deben seguir políticas de privacidad y minimizar la exposición. Nunca enviar contraseñas por correo. El soporte nunca solicitará la contraseña del usuario.\n\n## 11) Buenas prácticas recomend"
+      },
+      {
+        "id": 6,
+        "score": 0.5735,
+        "text": "usuario pierde acceso a su aplicación MFA, existen dos opciones: (1) usar códigos de recuperación (si los guardó al activar MFA), o (2) solicitar un reset de MFA a un Administrador.\n\nEl soporte puede asistir en casos críticos, pero el reset de MFA requiere verificación adicional. En empresas con requisitos estrictos, puede pedirse confirmación por un Administrador y validación del dominio corporativo. Por buenas prácticas, se recomienda que todos los usuarios Administr"
+      }
+    ]
+  }
+]

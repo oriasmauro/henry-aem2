@@ -1,0 +1,17 @@
+[
+  {
+    "user_question": "¿Cómo se solicita vacaciones y qué aprobaciones requiere?",
+    "score": 8,
+    "reason": "La respuesta es relevante y se basa en los chunks recuperados, explicando el proceso de solicitud de vacaciones y las aprobaciones necesarias. Sin embargo, podría mejorar en completitud al no mencionar explícitamente la política de acumulación y saldo anual de vacaciones, que es importante para entender el contexto completo."
+  },
+  {
+    "user_question": "¿Cómo se calcula la facturación por usuario activo?",
+    "score": 8,
+    "reason": "La respuesta es relevante y se basa en los chunks recuperados, explicando claramente cómo se calcula la facturación por usuario activo. Sin embargo, la respuesta podría ser más completa al incluir detalles sobre los planes alternativos y sus implicaciones. No hay alucinaciones ni inconsistencias, lo que refuerza la fidelidad de la información."
+  },
+  {
+    "user_question": "Si un usuario no puede entrar con SSO, ¿qué debería revisar soporte?",
+    "score": 9,
+    "reason": "La respuesta es altamente relevante y fiel a los chunks recuperados. Se abordan los puntos clave que soporte debe revisar, como la coincidencia del email y la existencia del usuario. Además, se menciona la solicitud de un ID de evento, que está respaldado por los chunks. La respuesta es completa y no presenta alucinaciones ni inconsistencias, lo que justifica un puntaje alto."
+  }
+]

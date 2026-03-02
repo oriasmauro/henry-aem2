@@ -8,6 +8,8 @@ import pytest
 sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
 
 from build_index import MAX_CHUNK_TOKENS, MIN_CHUNK_TOKENS, load_and_chunk_document
+from evaluator import normalize_evaluation
+from query import validate_index
 from rag import RetrievedChunk, build_response_json, format_context, search_similar_chunks
 from utils import Chunk, chunk_text_by_tokens, cosine_similarity
 
@@ -44,7 +46,7 @@ def test_load_and_chunk_document_allows_short_last_chunk(monkeypatch: pytest.Mon
 
     chunks = load_and_chunk_document(
         Path("data/faq_document.txt"),
-        embedding_model="text-embedding-3-small",
+        tokenizer_model_hint="text-embedding-3-small",
         chunk_size_tokens=120,
         overlap_tokens=20,
     )
@@ -64,7 +66,7 @@ def test_load_and_chunk_document_rejects_short_non_last_chunk(
     with pytest.raises(RuntimeError, match="Chunk token constraint failed"):
         load_and_chunk_document(
             Path("data/faq_document.txt"),
-            embedding_model="text-embedding-3-small",
+            tokenizer_model_hint="text-embedding-3-small",
             chunk_size_tokens=120,
             overlap_tokens=20,
         )
@@ -81,7 +83,7 @@ def test_load_and_chunk_document_rejects_over_max_tokens(monkeypatch: pytest.Mon
     with pytest.raises(RuntimeError, match="Chunk token constraint failed"):
         load_and_chunk_document(
             Path("data/faq_document.txt"),
-            embedding_model="text-embedding-3-small",
+            tokenizer_model_hint="text-embedding-3-small",
             chunk_size_tokens=120,
             overlap_tokens=20,
         )
@@ -130,3 +132,43 @@ def test_format_context_and_response_json_shape() -> None:
     assert out["system_answer"] == "A"
     assert len(out["chunks_related"]) == 2
     assert out["chunks_related"][0]["score"] == 0.9876
+
+
+def test_validate_index_rejects_missing_required_keys() -> None:
+    with pytest.raises(RuntimeError, match="missing required keys"):
+        validate_index({"provider": "openai"})
+
+
+def test_validate_index_rejects_embedding_dim_mismatch() -> None:
+    bad_index = {
+        "provider": "openai",
+        "embedding_model": "text-embedding-3-small",
+        "embedding_dim": 3,
+        "chunk_size_tokens": 120,
+        "overlap_tokens": 20,
+        "chunks": [
+            {"id": 1, "text": "a", "tokens": 10, "embedding": [0.1, 0.2]},
+        ],
+    }
+
+    with pytest.raises(RuntimeError, match="Chunk embedding dimension mismatch"):
+        validate_index(bad_index)
+
+
+def test_normalize_evaluation_accepts_valid_payload() -> None:
+    payload = {
+        "score": 8,
+        "reason": (
+            "Puntaje 8: la respuesta usa chunks relevantes y está bien apoyada "
+            "en el contexto, aunque podría ser más completa."
+        ),
+    }
+
+    normalized = normalize_evaluation(payload)
+    assert normalized["score"] == 8
+    assert "Puntaje 8" in normalized["reason"]
+
+
+def test_normalize_evaluation_rejects_short_reason() -> None:
+    with pytest.raises(RuntimeError, match="at least 50 characters"):
+        normalize_evaluation({"score": 7, "reason": "Muy corto"})

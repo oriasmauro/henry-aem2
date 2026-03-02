@@ -10,6 +10,7 @@ from typing import Any
 
 from openai import OpenAI
 
+from embedding_provider import EmbeddingProvider
 from utils import cosine_similarity
 
 logger = logging.getLogger("rag-core")
@@ -22,12 +23,11 @@ class RetrievedChunk:
     text: str
 
 
-def embed_query(client: OpenAI, embedding_model: str, question: str) -> list[float]:
-    logger.info("Embedding user question")
-    resp = client.embeddings.create(model=embedding_model, input=[question])
-    emb = resp.data[0].embedding
-    logger.info("Query embedding ready | dim=%d", len(emb))
-    return emb
+def embed_query(provider: EmbeddingProvider, question: str) -> list[float]:
+    logger.info("Embedding user question | provider=%s", provider.name)
+    embedding = provider.embed_texts([question])[0]
+    logger.info("Query embedding ready | dim=%d", len(embedding))
+    return embedding
 
 
 def search_similar_chunks(
