@@ -105,8 +105,7 @@ def load_and_chunk_document(
     invalid = [
         c
         for c in chunks
-        if c.tokens > MAX_CHUNK_TOKENS
-        or (c.tokens < MIN_CHUNK_TOKENS and c.id != last_chunk_id)
+        if c.tokens > MAX_CHUNK_TOKENS or (c.tokens < MIN_CHUNK_TOKENS and c.id != last_chunk_id)
     ]
     if invalid:
         examples = ", ".join(f"id={c.id},tokens={c.tokens}" for c in invalid[:5])
@@ -185,9 +184,7 @@ def main() -> None:
     load_dotenv()
 
     if not (MIN_CHUNK_TOKENS <= args.chunk_size <= MAX_CHUNK_TOKENS):
-        raise ValueError(
-            f"--chunk-size must be between {MIN_CHUNK_TOKENS} and {MAX_CHUNK_TOKENS}"
-        )
+        raise ValueError(f"--chunk-size must be between {MIN_CHUNK_TOKENS} and {MAX_CHUNK_TOKENS}")
 
     logger.info("Starting Index Pipeline")
 

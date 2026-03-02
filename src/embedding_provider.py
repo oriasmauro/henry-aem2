@@ -20,8 +20,7 @@ class EmbeddingProvider(Protocol):
     name: str
     dim: int
 
-    def embed_texts(self, texts: list[str]) -> list[list[float]]:
-        ...
+    def embed_texts(self, texts: list[str]) -> list[list[float]]: ...
 
 
 @dataclass
